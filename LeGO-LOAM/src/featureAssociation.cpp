@@ -367,7 +367,7 @@ void FeatureAssociation::extractFeatures() {
 
 void FeatureAssociation::TransformToStart(PointType const *const pi,
                                           PointType *const po) {
-  float s = 10 * (pi->intensity - int(pi->intensity));
+  float s = 1;
 
   float rx = s * transformCur[0];
   float ry = s * transformCur[1];
@@ -1223,14 +1223,12 @@ void FeatureAssociation::publishCloudsLast() {
 
   int cornerPointsLessSharpNum = cornerPointsLessSharp->points.size();
   for (int i = 0; i < cornerPointsLessSharpNum; i++) {
-    TransformToEnd(&cornerPointsLessSharp->points[i],
-                   &cornerPointsLessSharp->points[i]);
+    // TransformToEnd(&cornerPointsLessSharp->points[i], &cornerPointsLessSharp->points[i]);
   }
 
   int surfPointsLessFlatNum = surfPointsLessFlat->points.size();
   for (int i = 0; i < surfPointsLessFlatNum; i++) {
-    TransformToEnd(&surfPointsLessFlat->points[i],
-                   &surfPointsLessFlat->points[i]);
+    // TransformToEnd(&surfPointsLessFlat->points[i], &surfPointsLessFlat->points[i]);
   }
 
   pcl::PointCloud<PointType>::Ptr laserCloudTemp = cornerPointsLessSharp;

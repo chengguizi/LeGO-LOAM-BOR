@@ -1,5 +1,7 @@
 This is a customized LeGO-LOAM to save the mapping result in the dump format that is readable from [interactive_slam](https://github.com/SMRT-AIST/interactive_slam). After running ```run.launch```, you can find the dumped mapping result at ```/tmp/dump```. For the other functionalities, see [the original LeGO-LOAM](https://github.com/RobustFieldAutonomyLab/LeGO-LOAM) and [facontidavide's fork](https://github.com/facontidavide/LeGO-LOAM-BOR).
 
+# Modified for KITTI
+APE for KITTI00 improved from 8.37 to 5.94 m.
 
 # LeGO-LOAM-BOR
 
