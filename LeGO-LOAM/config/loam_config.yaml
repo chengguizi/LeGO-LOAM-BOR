@@ -1,24 +1,34 @@
 lego_loam:
 
     # VLP-16
+#    laser:
+#        num_vertical_scans: 16
+#        num_horizontal_scans: 1800
+#        ground_scan_index: 7
+#        vertical_angle_bottom: -15          # degrees
+#        vertical_angle_top: 15              # degrees
+#        sensor_mount_angle: 0               # degrees
+#        scan_period: 0.1                    # seconds
+
+    # HDL64
     laser:
-        num_vertical_scans: 16
+        num_vertical_scans: 64
         num_horizontal_scans: 1800
-        ground_scan_index: 7
-        vertical_angle_bottom: -15          # degrees
-        vertical_angle_top: 15              # degrees
+        ground_scan_index: 30
+        vertical_angle_bottom: -24.8          # degrees
+        vertical_angle_top: 2              # degrees
         sensor_mount_angle: 0               # degrees
         scan_period: 0.1                    # seconds
 
     imageProjection:
-        segment_valid_point_num: 5
-        segment_valid_line_num: 3
-        segment_theta: 60.0                      # decrese this value may improve accuracy
+        segment_valid_point_num: 10
+        segment_valid_line_num: 6
+        segment_theta: 30.0                      # decrese this value may improve accuracy
 
     featureAssociation:
         edge_threshold: 0.1
         surf_threshold: 0.1
-        nearest_feature_search_distance: 5
+        nearest_feature_search_distance: 15
 
     mapping:
         enable_loop_closure: true
