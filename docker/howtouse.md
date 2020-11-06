@@ -11,7 +11,7 @@ cd lego_loam/docker
 
 ## Run
 
-On the host:
+### On host:
 ```bash
 roscore
 ```
@@ -21,7 +21,7 @@ rosparam set use_sim_time true
 rviz -d lego_loam/LeGO-LOAM/launch/rviz/test.rviz
 ```
 
-On the docker image:
+### On docker image:
 ```bash
 cd lego_loam/docker
 ./run.sh -v 2018-05-18-15-28-12_39.bag:/tmp/2018-05-18-15-28-12_39.bag
