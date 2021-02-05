@@ -16,6 +16,8 @@ void dump(const std::string& dump_directory,
   const std::vector<pcl::PointCloud<pcl::PointXYZI>::Ptr>& surf_cloud_keyframes,
   const std::vector<pcl::PointCloud<pcl::PointXYZI>::Ptr>& outlier_cloud_keyframes
 ) {
+  return;
+
   boost::filesystem::create_directories(dump_directory);
 
   std::vector<gtsam::Pose3> keyframe_poses(isam_current_estimate.size());

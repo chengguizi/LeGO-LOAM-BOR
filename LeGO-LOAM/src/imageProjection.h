@@ -14,6 +14,7 @@ class ImageProjection {
   ~ImageProjection() = default;
 
   void cloudHandler(const sensor_msgs::PointCloud2ConstPtr &laserCloudMsg);
+  void cloudHandler(const std_msgs::Header& header, const pcl::PointCloud<pcl::PointXYZI>::ConstPtr &cloud);
 
  private:
   void findStartEndAngle();

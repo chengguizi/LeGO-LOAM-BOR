@@ -1,6 +1,8 @@
 #ifndef TRANSFORMFUSION_H
 #define TRANSFORMFUSION_H
 
+#include <functional>
+#include <nav_msgs/Odometry.h>
 #include "lego_loam/utility.h"
 
 class TransformFusion {
@@ -29,6 +31,8 @@ class TransformFusion {
   std_msgs::Header currentHeader;
 
  public:
+  std::function<void(const nav_msgs::Odometry&)> odom_callback;
+
   TransformFusion(ros::NodeHandle& node);
 
   void transformAssociateToMap();

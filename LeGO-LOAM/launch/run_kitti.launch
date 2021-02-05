@@ -1,0 +1,26 @@
+<launch>
+
+    <!--- Sim Time -->
+    <param name="/use_sim_time" value="true" />
+
+    <!--- Run Rviz-->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find lego_loam_bor)/launch/test.rviz" />
+
+    <!--- TF -->
+    <node pkg="tf" type="static_transform_publisher" name="camera_init_to_map"  args="0 0 0 1.570795   0        1.570795 map    camera_init 10" />
+    <node pkg="tf" type="static_transform_publisher" name="base_link_to_camera" args="0 0 0 -1.570795 -1.570795 0        camera base_link   10" />
+
+    <arg name="sequence_path" />
+    <arg name="dst_traj_path" />
+    <arg name="config" default="$(find lego_loam_bor)/config/loam_config.yaml" />
+    <arg name="adaptive" default="false" />
+
+    <rosparam file="$(arg config)" command="load"/>
+
+    <node pkg="lego_loam_bor" type="lego_loam_kitti" name="lego_loam_kitti" output="screen" required="true" >
+        <param name="sequence_path" value="$(arg sequence_path)" />
+        <param name="dst_traj_path" value="$(arg dst_traj_path)" />
+        <param name="adaptive" value="$(arg adaptive)" />
+    </node>
+
+</launch>

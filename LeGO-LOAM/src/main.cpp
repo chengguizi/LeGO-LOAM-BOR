@@ -71,7 +71,7 @@ int main(int argc, char** argv) {
 
     for(const rosbag::MessageInstance& m: view)
     {
-      const sensor_msgs::PointCloud2ConstPtr &cloud = m.instantiate<sensor_msgs::PointCloud2>(); 
+      const sensor_msgs::PointCloud2ConstPtr &cloud = m.instantiate<sensor_msgs::PointCloud2>();
       if (cloud != NULL){
         IP.cloudHandler(cloud);
         //ROS_INFO("cloud");

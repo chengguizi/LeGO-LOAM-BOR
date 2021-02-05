@@ -1277,6 +1277,15 @@ void FeatureAssociation::runFeatureAssociation() {
 
     if( !ros::ok() ) break;
 
+    nh.getParam("/lego_loam/featureAssociation/edge_threshold", _edge_threshold);
+    nh.getParam("/lego_loam/featureAssociation/surf_threshold", _surf_threshold);
+
+    float nearest_dist;
+    nh.getParam("/lego_loam/featureAssociation/nearest_feature_search_distance", nearest_dist);
+    _nearest_feature_dist_sqr = nearest_dist*nearest_dist;
+
+    ROS_INFO_STREAM("assoc edge:" << _edge_threshold << " surf:" << _surf_threshold << " nearest:" << nearest_dist);
+
     //--------------
     outlierCloud = projection.outlier_cloud;
     segmentedCloud = projection.segmented_cloud;

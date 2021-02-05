@@ -140,6 +140,14 @@ void ImageProjection::cloudHandler(
   pcl::removeNaNFromPointCloud(*_laser_cloud_in, *_laser_cloud_in, indices);
   _seg_msg.header = laserCloudMsg->header;
 
+  _nh.getParam("/lego_loam/imageProjection/segment_theta", _segment_theta);
+  _segment_theta *= DEG_TO_RAD;
+
+  _nh.getParam("/lego_loam/imageProjection/segment_valid_point_num", _segment_valid_point_num);
+  _nh.getParam("/lego_loam/imageProjection/segment_valid_line_num", _segment_valid_line_num);
+
+  ROS_INFO_STREAM("segtheta:" << _segment_theta << " point_num:" << _segment_valid_point_num << " line_num:" << _segment_valid_line_num);
+
   findStartEndAngle();
   // Range image projection
   projectPointCloud();
@@ -151,6 +159,34 @@ void ImageProjection::cloudHandler(
   publishClouds();
 }
 
+void ImageProjection::cloudHandler(const std_msgs::Header& header, const pcl::PointCloud<pcl::PointXYZI>::ConstPtr &cloud) {
+  // Reset parameters
+  resetParameters();
+
+  // Copy and remove NAN points
+  *_laser_cloud_in = *cloud;
+  std::vector<int> indices;
+  pcl::removeNaNFromPointCloud(*_laser_cloud_in, *_laser_cloud_in, indices);
+  _seg_msg.header = header;
+
+  _nh.getParam("/lego_loam/imageProjection/segment_theta", _segment_theta);
+  _segment_theta *= DEG_TO_RAD;
+
+  _nh.getParam("/lego_loam/imageProjection/segment_valid_point_num", _segment_valid_point_num);
+  _nh.getParam("/lego_loam/imageProjection/segment_valid_line_num", _segment_valid_line_num);
+
+  ROS_INFO_STREAM("segtheta:" << _segment_theta << " point_num:" << _segment_valid_point_num << " line_num:" << _segment_valid_line_num);
+
+  findStartEndAngle();
+  // Range image projection
+  projectPointCloud();
+  // Mark ground points
+  groundRemoval();
+  // Point cloud segmentation
+  cloudSegmentation();
+  //publish (optionally)
+  publishClouds();
+}
 
 void ImageProjection::projectPointCloud() {
   // range image projection

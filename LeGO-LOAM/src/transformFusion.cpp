@@ -204,6 +204,10 @@ void TransformFusion::laserOdometryHandler(
   laserOdometry2.pose.pose.position.z = transformMapped[5];
   pubLaserOdometry2.publish(laserOdometry2);
 
+  if(odom_callback) {
+      odom_callback(laserOdometry2);
+  }
+
   laserOdometryTrans2.stamp_ = laserOdometry->header.stamp;
   laserOdometryTrans2.setRotation(
       tf::Quaternion(-geoQuat.y, -geoQuat.z, geoQuat.x, geoQuat.w));
